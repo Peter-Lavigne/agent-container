@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:${PATH:-}"
+
+IMAGE="agent-container"
+NAME="agent-container"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
+    echo "Building image $IMAGE (first run takes a few minutes)..."
+    docker build \
+        --build-arg USER_UID="$(id -u)" \
+        --build-arg USER_GID="$(id -g)" \
+        --build-arg USERNAME="$(id -un)" \
+        -t "$IMAGE" \
+        "$DIR"
+fi
+
+if ! docker container inspect "$NAME" >/dev/null 2>&1; then
+    echo "Creating container $NAME..."
+    # Font stack (/usr/share/fonts, /etc/fonts, /var/cache/fontconfig) is
+    # mounted so Playwright snapshot renders match the host byte-for-byte.
+    docker run -d \
+        --name "$NAME" \
+        --hostname "$NAME" \
+        --user "$(id -u):$(id -g)" \
+        --add-host=host.docker.internal:host-gateway \
+        -e POSTGRES_HOST=host.docker.internal \
+        -e HOME="$HOME" \
+        -e AGENT_CONTAINER="$NAME" \
+        -v "$HOME/src:$HOME/src" \
+        -v "$HOME/.claude:$HOME/.claude" \
+        -v "$HOME/.claude.json:$HOME/.claude.json" \
+        -v "$HOME/.bashrc:$HOME/.bashrc:ro" \
+        -v /usr/share/fonts:/usr/share/fonts:ro \
+        -v /etc/fonts:/etc/fonts:ro \
+        -v /var/cache/fontconfig:/var/cache/fontconfig:ro \
+        -v "$HOME/.cache/ms-playwright:$HOME/.cache/ms-playwright" \
+        -w "$HOME/src" \
+        "$IMAGE" >/dev/null
+elif [ "$(docker container inspect -f '{{.State.Running}}' "$NAME")" != "true" ]; then
+    echo "Starting container $NAME..."
+    docker start "$NAME" >/dev/null
+fi
+
+exec docker exec -it -w "$HOME/src" "$NAME" bash
