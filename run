@@ -30,6 +30,7 @@ if ! docker container inspect "$NAME" >/dev/null 2>&1; then
         -e HOME="$HOME" \
         -e AGENT_CONTAINER="$NAME" \
         -v "$HOME/src:$HOME/src" \
+        -v "$HOME/bin:$HOME/bin" \
         -v "$HOME/.claude:$HOME/.claude" \
         -v "$HOME/.claude.json:$HOME/.claude.json" \
         -v "$HOME/.bashrc:$HOME/.bashrc:ro" \
