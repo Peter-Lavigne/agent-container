@@ -33,6 +33,7 @@ if ! docker container inspect "$NAME" >/dev/null 2>&1; then
         -v "$HOME/bin:$HOME/bin" \
         -v "$HOME/.claude:$HOME/.claude" \
         -v "$HOME/.claude.json:$HOME/.claude.json" \
+        -v "$HOME/.gitconfig:$HOME/.gitconfig:ro" \
         -v "$HOME/.bashrc:$HOME/.bashrc:ro" \
         -v /usr/share/fonts:/usr/share/fonts:ro \
         -v /etc/fonts:/etc/fonts:ro \
