@@ -2,9 +2,9 @@
 name = "agent-container"
 version = "1.0.0"
 dependencies = [
-    "pl-ci-cd>=0.0.78",
+    "verploy>=0.0.2",
 ]
 requires-python = ">=3.12"
 
 [tool.uv.sources]
-pl-ci-cd = { path = "/home/peter/src/pl-ci-cd", editable = true }
+verploy = { path = "/home/peter/src/verploy", editable = true }
