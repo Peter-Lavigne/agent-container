@@ -41,7 +41,6 @@ if ! docker container inspect "$NAME" >/dev/null 2>&1; then
         -v "$HOME/.cache/ms-playwright:$HOME/.cache/ms-playwright" \
         -w "$HOME/src" \
         "$IMAGE" >/dev/null
-    docker exec "$NAME" uv tool install --force --editable "$HOME/src/pl-ci-cd"
 elif [ "$(docker container inspect -f '{{.State.Running}}' "$NAME")" != "true" ]; then
     echo "Starting container $NAME..."
     docker start "$NAME" >/dev/null
