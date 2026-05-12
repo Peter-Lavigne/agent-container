@@ -456,7 +456,7 @@ wheels = [
 
 [[package]]
 name = "verploy"
-version = "0.0.2"
+version = "0.0.20"
 source = { editable = "../verploy" }
 dependencies = [
     { name = "pl-mocks-and-fakes" },
