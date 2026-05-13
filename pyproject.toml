@@ -2,9 +2,7 @@
 name = "agent-container"
 version = "1.0.0"
 dependencies = [
-    "verploy>=0.0.2",
+    "verploy==0.0.26",
 ]
 requires-python = ">=3.12"
 
-[tool.uv.sources]
-verploy = { path = "/home/peter/src/verploy", editable = true }
