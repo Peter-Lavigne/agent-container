@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "verploy", editable = "/home/peter/src/verploy" }]
+requires-dist = [{ name = "verploy", specifier = "==0.0.26" }]
 
 [[package]]
 name = "annotated-types"
@@ -456,8 +456,8 @@ wheels = [
 
 [[package]]
 name = "verploy"
-version = "0.0.23"
-source = { editable = "/home/peter/src/verploy" }
+version = "0.0.26"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pl-mocks-and-fakes" },
     { name = "pl-run-program" },
@@ -465,21 +465,7 @@ dependencies = [
     { name = "pl-user-io" },
     { name = "typer" },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "pl-mocks-and-fakes", specifier = ">=0.0.30" },
-    { name = "pl-run-program", specifier = ">=0.0.30" },
-    { name = "pl-tiny-clients", specifier = ">=0.0.42" },
-    { name = "pl-user-io", specifier = ">=0.0.18" },
-    { name = "typer", specifier = "==0.21.1" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "mutmut", specifier = "==3.4.0" },
-    { name = "pyright", specifier = "==1.1.409" },
-    { name = "pytest", specifier = "==9.0.2" },
-    { name = "pytest-cov", specifier = "==7.0.0" },
-    { name = "ruff", specifier = "==0.15.2" },
+sdist = { url = "https://files.pythonhosted.org/packages/24/1d/57eb9ef283b6d872e88b4ec37b6a59a3c3df303a1a5ecc9f5a7a3e14acea/verploy-0.0.26.tar.gz", hash = "sha256:b03dc79fd139f070d7d965d11b14e6d950188962abf4d4e3b8166cc31644d0f4", size = 8756, upload-time = "2026-05-13T18:42:44.711Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9f/79/2aed4b1a3239bcc35b00ce1f2e3e1b3bb4b4e020386938873c306a44d7ca/verploy-0.0.26-py3-none-any.whl", hash = "sha256:6d5f252e7cb87b73ca5ec7b0f4f53dfeed6b517379caf45e2f11d80cf0715b59", size = 10127, upload-time = "2026-05-13T18:42:45.42Z" },
 ]
